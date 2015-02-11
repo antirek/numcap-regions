@@ -15,20 +15,9 @@
   },
   "author": "",
   "license": "MIT",
-  "bugs": {
-    "url": ""
-  },
   "homepage": "",
   "devDependencies": {
     "russian-codes": "*",
     "numcap": "^0.0.5"
-  },
-  "readme": "",
-  "readmeFilename": "README.md",
-  "_id": "phoneregion@0.0.1",
-  "dist": {
-    "shasum": ""
-  },
-  "_from": "phoneregion@",
-  "_resolved": ""
+  }
 }
