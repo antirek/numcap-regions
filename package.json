@@ -1,5 +1,5 @@
 {
-  "name": "phoneregion",
+  "name": "numcap-regions",
   "version": "0.0.1",
   "description": "Russian Federation region codes",
   "main": "index.js",
