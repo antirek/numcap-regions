@@ -6,11 +6,11 @@ var datafile = './data/capacityregions.json';
 var data = JSON.parse(fs.readFileSync(datafile));
 console.log(data[0], data.length);
 
-MongoClient.connect('mongodb://127.0.0.1:27017/test', function(err, db) {
+MongoClient.connect('mongodb://127.0.0.1:27017/regions', function(err, db) {
 
     if(err) throw err;
 
-    var collection = db.collection('test_insert');
+    var collection = db.collection('regions');
 
     data.forEach(function (element, index) {
         collection.insert(element, function(err, docs) {
