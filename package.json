@@ -19,5 +19,9 @@
   "devDependencies": {
     "russian-codes": "*",
     "numcap": "^0.0.5"
+  },
+  "preferGlobal": "true",
+  "bin": {
+    "nr_file": "file.js"
   }
 }
