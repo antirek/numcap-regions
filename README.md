@@ -1,22 +1,28 @@
 numcap-regions
 ==============
-Phone numbers of all operators in Russian Federation with regions codes.
+Phone numbers of all operators in Russian Federation with regions codes
+
+CLI tool for make JSON data file from npm **numcap** and **russian-codes**
 
 
 Install
 =======
-> npm install numcap-regions
+> npm install numcap-regions -g
 
 
-Update numcap data
-===========
+Usage
+=====
 
-Numcap-regions contain JSON file with data of resource, but you can use ncli.js and index.js for update data:
+### Update existing JSON file
 
-Run from directory of your project
+> nrcli -m 
 
-> node ./node_modules/numcap-regions/node_modules/numcap/ncli.js --download
+### Load JSON file to mongo
 
-> node ./node_modules/numcap-regions/node_modules/numcap/ncli.js --csv2json
+> nrcli -j   // use default settings
 
-> node ./node_modules/numcap-regions/index.js
+> nrcli -j [--host] [--port] [--database] [--collection]
+
+### Help
+
+> nrcli --help

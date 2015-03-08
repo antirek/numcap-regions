@@ -1,9 +1,13 @@
 #!/usr/bin/env node
 
-var cli = require('cli').enable('status');
+var cli = require('cli').enable('status', 'version');
+
+cli.setApp('Number regions CLI tool', '0.0.2');
 
 cli.parse({
     make:  ['m', 'make json db'],
+    dataDirectory: [false, 'dataDirectory of source json data file for make', 
+          'path', './node_modules/numcap/data/'],
     json2mongo:  ['j', 'move data from json file to mongodb'],
     host: ['h', 'mongodb host', 'ip', 'localhost'],
     port: ['p', 'mongodb port', 'number', 27017],
@@ -15,7 +19,8 @@ cli.parse({
 cli.main(function(args, options) {
       
     if (options.make) {
-        this.debug('Enabling logging'); 
+        var q = require('./makeJson');
+        q();
     }
 
     if (options.json2mongo) {

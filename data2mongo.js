@@ -16,7 +16,7 @@ var MongoInserter = function (mongoclient, config) {
             if (err) {            
                 defer.reject(err);
             } else {
-                dbConn = db;          
+                dbConn = db;
                 defer.resolve();
             }
         });
@@ -26,7 +26,8 @@ var MongoInserter = function (mongoclient, config) {
     this.insert = function (data) {
         return Q.forEach(data, function (element) {
             var defer = Q.defer();
-            dbConn.collection(config.collection).insert(element, function (err, result) {        
+            dbConn.collection(config.collection)
+              .insert(element, function (err, result) {
                 if (err) {
                     defer.reject(err);
                 } else {

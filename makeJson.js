@@ -57,5 +57,4 @@ function saveJson(jsonContent, file) {
     });
 }
 
-makeExtendedCapacityJsonFile();
-
+module.exports = makeExtendedCapacityJsonFile;
