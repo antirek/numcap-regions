@@ -17,7 +17,7 @@ Usage
 
 > nrcli -m 
 
-### Load JSON file to mongo
+### Load JSON file to MongoDB
 
 > nrcli -j   // use default settings
 
@@ -26,3 +26,27 @@ Usage
 ### Help
 
 > nrcli --help
+
+Data
+====
+
+### Sample data
+
+`````
+[ 
+ .... 
+  {
+    "code": "301",
+    "begin": "2100000",
+    "end": "2109999",
+    "capacity": "10000",
+    "operator": "АСВТ(Москва)",
+    "region": {
+      "title": "Республика Бурятия",
+      "code": "03"
+    }
+  },
+ ....
+]
+
+`````
