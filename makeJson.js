@@ -9,6 +9,7 @@ function makeExtendedCapacityJsonFile() {
     var filenames = fileloaderHelper.getFilelistByExtension(dataDirectory, 'json');
     var fullCapacity = [];
     var resultFile = [];
+    
     for (var i = 0; i < filenames.length; i++) {
         var fileName = dataDirectory + filenames[i];
         var fileContentAsJson = JSON.parse(fs.readFileSync(fileName, 'utf8'));
@@ -16,6 +17,7 @@ function makeExtendedCapacityJsonFile() {
             fullCapacity.push(fileContentAsJson[j]);
         }
     }
+
     codes.loadData(function () {
         for (var i = 1; i < fullCapacity.length; i++) {
             elementNumcap = fullCapacity[i];
@@ -25,7 +27,8 @@ function makeExtendedCapacityJsonFile() {
             if (buffer.shortName.indexOf('российская федерация') > -1 || buffer.shortName.indexOf('Байконур') > -1) {
                 elementNumcap.region = {
                     "title": buffer.baseName,
-                    "code": null
+                    "code": null,
+                    "county": null
                     //"prev": buffer.shortName
                 }
             }
@@ -35,7 +38,8 @@ function makeExtendedCapacityJsonFile() {
                         if (buffer.shortName.indexOf(buffer.normalise(array[i].title)) > -1) {
                             elementNumcap.region = {
                                 "title": array[i].title,
-                                "code": array[i].code
+                                "code": array[i].code, 
+                                "county": array[i].county
                                 //"prev": buffer.shortName
                             }
                             break;
