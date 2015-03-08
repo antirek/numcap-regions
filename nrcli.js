@@ -9,7 +9,7 @@ cli.parse({
     port: ['p', 'mongodb port', 'number', 27017],
     database: ['d', 'mongodb database', 'string', 'regions'],
     collection: ['c', 'mongodb collection', 'string', 'regions'],
-    datafile: [false, 'datafile path', 'path', './data/capacityregions1.json']
+    datafile: [false, 'datafile path', 'path', './data/capacityregions.json']
 });
 
 cli.main(function(args, options) {
@@ -24,15 +24,18 @@ cli.main(function(args, options) {
 
         var mi = new MongoInserter(MongoClient, options);
         mi.connect()
-          .then(function () {
-            var data = require(options.datafile);
-            console.log(data);
-            mi.insert(data);
-          })          
-          .fail(function (err) {
-              console.log('mi fail', err);
+            .then(function () {
+                var data = require(options.datafile);
+                console.log('data length:', data.length);
+                return mi.insert(data);
             })
-          .fin(mi.close);        
+            .then(function (items) {
+                console.log('mi items inserted', items.length);
+            })          
+            .fail(function (err) {
+                console.log('fail', err);
+            })
+            .fin(mi.close);        
     }
 
 });

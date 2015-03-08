@@ -1,6 +1,7 @@
 'use strict';
 
 var Q = require('q');
+require('q-foreach')(Q);
 
 var MongoInserter = function (mongoclient, config) {
     var dbConn = null;
@@ -23,15 +24,17 @@ var MongoInserter = function (mongoclient, config) {
     };
 
     this.insert = function (data) {
-        var defer = Q.defer();
-        dbConn.collection(config.collection).insert(data, function (err, result) {        
-            if (err) {
-                defer.reject(err);
-            } else {
-                defer.resolve(result);
-            }
+        return Q.forEach(data, function (element) {
+            var defer = Q.defer();
+            dbConn.collection(config.collection).insert(element, function (err, result) {        
+                if (err) {
+                    defer.reject(err);
+                } else {
+                    defer.resolve(result);
+                }
+            });
+            return defer.promise;
         });
-        return defer.promise;
     };  
 
     this.close = function () {
