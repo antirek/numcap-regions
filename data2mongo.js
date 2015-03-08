@@ -1,17 +1,50 @@
+'use strict';
 
-var MongoClient = require('mongodb').MongoClient,
-    fs = require('fs');
+var Q = require('q');
 
-var datafile = './data/capacityregions.json';
-var data = require(datafile);
-MongoClient.connect('mongodb://127.0.0.1:27017/regions', function(err, db) {
+var MongoInserter = function (mongoclient, config) {
+    var dbConn = null;
+    
+    var makeUrl = function () {
+        return ['mongodb://', config.host, ':', config.port, '/', config.database].join('');
+    };
 
-    if(err) throw err;
+    this.connect = function () {
+        var defer = Q.defer();
+        mongoclient.connect(makeUrl(), function (err, db) {
+            if (err) {            
+                defer.reject(err);
+            } else {
+                dbConn = db;          
+                defer.resolve();
+            }
+        });
+        return defer.promise;
+    };
 
-    var collection = db.collection('regions');
-	collection.insert(data,function(err,asd){
-		console.log('err',err);
-		db.close();
-	})
-});
+    this.insert = function (data) {
+        var defer = Q.defer();
+        dbConn.collection(config.collection).insert(data, function (err, result) {        
+            if (err) {
+                defer.reject(err);
+            } else {
+                defer.resolve(result);
+            }
+        });
+        return defer.promise;
+    };  
 
+    this.close = function () {
+        var defer = Q.defer();
+        dbConn.close(function (err) {
+            if (err) {
+                defer.reject(err);
+            } else {
+                defer.resolve();
+            }
+        });
+        return defer.promise;
+    };
+};
+
+module.exports = MongoInserter;

@@ -1,6 +1,6 @@
 {
   "name": "numcap-regions",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Russian Federation region codes",
   "main": "index.js",
   "directories": {
@@ -16,12 +16,15 @@
   "author": "",
   "license": "MIT",
   "homepage": "",
-  "devDependencies": {
-    "russian-codes": "*",
-    "numcap": "^0.0.5"
+  "dependencies": {
+    "cli": "^0.6.5",
+    "mongodb": "^1.4.33",
+    "numcap": "0.0.5",
+    "q": "^1.2.0",
+    "russian-codes": "0.0.4"
   },
-  "preferGlobal": "true",
+  "preferGlobal": true,
   "bin": {
-    "nr_file": "file.js"
+    "nrcli": "index.js"
   }
 }
