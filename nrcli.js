@@ -5,7 +5,7 @@ var cli = require('cli').enable('status', 'version');
 cli.setApp('Number regions CLI tool', '0.0.2');
 
 cli.parse({
-    make:  ['m', 'make json db'],
+    makeJson:  ['m', 'make json file'],
     dataDirectory: [false, 'dataDirectory of source json data file for make', 
           'path', './node_modules/numcap/data/'],
     json2mongo:  ['j', 'move data from json file to mongodb'],
@@ -18,9 +18,11 @@ cli.parse({
 
 cli.main(function(args, options) {
       
-    if (options.make) {
-        var q = require('./makeJson');
-        q();
+    if (options.makeJson) {
+        var JsonMaker = require('./makeJson');
+
+        var jsonmaker = new JsonMaker(options);
+        jsonmaker.makeExtendedCapacityJsonFile();
     }
 
     if (options.json2mongo) {

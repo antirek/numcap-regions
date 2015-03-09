@@ -7,7 +7,10 @@ var MongoInserter = function (mongoclient, config) {
     var dbConn = null;
     
     var makeUrl = function () {
-        return ['mongodb://', config.host, ':', config.port, '/', config.database].join('');
+        return [
+            'mongodb://', config.host, ':', 
+            config.port, '/', config.database
+          ].join('');
     };
 
     this.connect = function () {
