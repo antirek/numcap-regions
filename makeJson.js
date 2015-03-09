@@ -34,18 +34,17 @@ var JsonMaker = function (config) {
                     elementNumcap.region = {
                         "title": buffer.baseName,
                         "code": null,
-                        "county": null
-                    }
-                }
-                else {
+                        "county": null,
+                    };
+                } else {
                     codes.getRegionsByType(buffer.type, function (err, array) {
                         for (var i = 0; i < array.length; i++) {
                             if (buffer.shortName.indexOf(buffer.normalise(array[i].title)) > -1) {
                                 elementNumcap.region = {
                                     "title": array[i].title,
                                     "code": array[i].code, 
-                                    "county": array[i].county
-                                }
+                                    "county": array[i].county,
+                                };
                                 break;
                             }
                         }
@@ -57,7 +56,7 @@ var JsonMaker = function (config) {
         });
     };
 
-    function saveJson(jsonContent, file) {
+    function saveJson (jsonContent, file) {
         var json = JSON.stringify(jsonContent, null, 2);
         fs.writeFile(file, json, function (err) {
             if (!err) console.log("JSON saved to " + file);
