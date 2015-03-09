@@ -16,7 +16,7 @@ cli.parse({
     datafile: [false, 'datafile path', 'path', './data/capacityregions.json']
 });
 
-cli.main(function(args, options) {
+cli.main(function (args, options) {
       
     if (options.makeJson) {
         var JsonMaker = require('./makeJson');
