@@ -4,8 +4,6 @@ Phone numbers of all operators in Russian Federation with regions codes
 
 CLI tool for make JSON data file from npm **numcap** and **russian-codes**
 
-Actual data: 11.03.2015
-
 Install
 =======
 > npm install numcap-regions -g
@@ -14,9 +12,9 @@ Install
 Usage
 =====
 
-### Update existing JSON file
+### Prepare JSON file
 
-> nrcli -m 
+> nrcli -m
 
 ### Load JSON file to MongoDB
 
