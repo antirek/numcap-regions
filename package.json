@@ -1,6 +1,6 @@
 {
   "name": "numcap-regions",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Russian Federation region codes",
   "main": "nrcli.js",
   "directories": {
@@ -19,7 +19,7 @@
   "dependencies": {
     "cli": "^0.6.5",
     "mongodb": "^1.4.33",
-    "numcap": "0.0.5",
+    "numcap": "0.0.7",
     "q": "^1.2.0",
     "q-foreach": "0.0.3",
     "russian-codes": "^0.0.5"

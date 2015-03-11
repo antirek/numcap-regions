@@ -4,6 +4,7 @@ Phone numbers of all operators in Russian Federation with regions codes
 
 CLI tool for make JSON data file from npm **numcap** and **russian-codes**
 
+Actual data: 11.03.2015
 
 Install
 =======
