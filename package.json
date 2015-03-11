@@ -1,6 +1,6 @@
 {
   "name": "numcap-regions",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Russian Federation region codes",
   "main": "nrcli.js",
   "directories": {

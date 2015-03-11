@@ -13,7 +13,7 @@ cli.parse({
     port: ['p', 'mongodb port', 'number', 27017],
     database: ['d', 'mongodb database', 'string', 'regions'],
     collection: ['c', 'mongodb collection', 'string', 'regions'],
-    datafile: [false, 'datafile path', 'path', './data/capacityregions.json']
+    datafile: [false, 'datafile path', 'path', '/tmp/capacityregions.json']
 });
 
 cli.main(function (args, options) {
