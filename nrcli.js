@@ -1,13 +1,16 @@
 #!/usr/bin/env node
 
 var cli = require('cli').enable('status', 'version');
+var path = require('path');
 
-cli.setApp('Number regions CLI tool', '0.0.2');
+var numcap_data_path = path.join(__dirname, "node_modules/numcap/data/");
+
+cli.setApp('Number regions CLI tool', '0.0.3');
 
 cli.parse({
     makeJson:  ['m', 'make json file'],
     dataDirectory: [false, 'dataDirectory of source json data file for make', 
-          'path', './node_modules/numcap/data/'],
+          'path', numcap_data_path],
     json2mongo:  ['j', 'move data from json file to mongodb'],
     host: ['h', 'mongodb host', 'ip', 'localhost'],
     port: ['p', 'mongodb port', 'number', 27017],
