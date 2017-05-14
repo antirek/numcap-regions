@@ -30,27 +30,29 @@ var JsonMaker = function (config) {
                 buffer.fillShortName();
                 buffer.detectType();
 
-                if (buffer.shortName.indexOf('российская федерация') > -1 || buffer.shortName.indexOf('Байконур') > -1) {
-                    elementNumcap.region = {
-                        "title": buffer.baseName,
-                        "code": null,
-                        "county": null,
-                    };
-                } else {
-                    codes.getRegionsByType(buffer.type, function (err, array) {
-                        for (var i = 0; i < array.length; i++) {
-                            if (buffer.shortName.indexOf(buffer.normalise(array[i].title)) > -1) {
-                                elementNumcap.region = {
-                                    "title": array[i].title,
-                                    "code": array[i].code, 
-                                    "county": array[i].county,
-                                };
-                                break;
+                if (buffer.shortName && typeof buffer.shortName == 'string') {
+                    if (buffer.shortName.indexOf('российская федерация') > -1 || buffer.shortName.indexOf('Байконур') > -1) {
+                        elementNumcap.region = {
+                            "title": buffer.baseName,
+                            "code": null,
+                            "county": null,
+                        };
+                    } else {
+                        codes.getRegionsByType(buffer.type, function (err, array) {
+                            for (var i = 0; i < array.length; i++) {
+                                if (buffer.shortName.indexOf(buffer.normalise(array[i].title)) > -1) {
+                                    elementNumcap.region = {
+                                        "title": array[i].title,
+                                        "code": array[i].code, 
+                                        "county": array[i].county,
+                                    };
+                                    break;
+                                }
                             }
-                        }
-                    });
+                        });
+                    }
+                    resultFile.push(elementNumcap);
                 }
-                resultFile.push(elementNumcap);
             }
             saveJson(resultFile, config.datafile);
         });
