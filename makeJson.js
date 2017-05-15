@@ -43,7 +43,7 @@ var JsonMaker = function (config) {
             };
         } else {
             codes.getRegionsByType(buffer.type, function (err, array) {
-                
+
                 for (var i = 0; i < array.length; i++) {
                     if (buffer.shortName.indexOf(normalise(array[i].title)) > -1) {
                         elementNumcap.region = {
@@ -59,6 +59,58 @@ var JsonMaker = function (config) {
         return elementNumcap;
     }
 
+    var prepare = function (elementNumcap) {
+        if (elementNumcap.region.indexOf('Республика Удмуртская') > -1) {
+         //   console.log(elementNumcap);
+         //   f = true;
+            elementNumcap.region = 'Удмуртская Республика';
+        }                    
+
+        if (elementNumcap.region.indexOf('Ханты - Мансийский - Югра АО') > -1) {
+            //console.log(elementNumcap);
+            //f = true;
+            elementNumcap.region = 'Ханты-Мансийский автономный округ - Югра';
+        }
+
+        if (elementNumcap.region.indexOf('Ямало-Ненецкий АО') > -1) {
+            //console.log(elementNumcap);
+            //f = true;
+            elementNumcap.region = 'Ямало-Ненецкий автономный округ';
+        }
+
+        if (elementNumcap.region.indexOf('Республика Саха /Якутия/') > -1) {
+            //console.log(elementNumcap);
+            //f = true;
+            elementNumcap.region = 'Республика Саха (Якутия)';
+        }
+
+        if (elementNumcap.region.indexOf('Чукотский АО') > -1) {
+            //console.log(elementNumcap);
+            //f = true;
+            elementNumcap.region = 'Чукотский автономный округ';
+        }
+        
+        if (elementNumcap.region.indexOf('Ненецкий АО') > -1) {
+            //console.log(elementNumcap);
+            //f = true;
+            elementNumcap.region = 'Ненецкий автономный округ';
+        }
+
+        if (elementNumcap.region.indexOf('Республика Кабардино-Балкарская') > -1) {
+            //console.log(elementNumcap);
+            //f = true;
+            elementNumcap.region = 'Кабардино-Балкарская республика';
+        }
+
+        if (elementNumcap.region.indexOf('Республика Чеченская') > -1) {
+            //console.log(elementNumcap);
+            //f = true;
+            elementNumcap.region = 'Чеченская республика';
+        }
+
+        return elementNumcap;
+    };
+
     var makeExtendedCapacityJsonFile = function () {
         var fullCapacity = loadData();
         console.log('loaded data')
@@ -69,10 +121,9 @@ var JsonMaker = function (config) {
                 var buffer;
                 var f;
                 if (elementNumcap.region) {
-                    if (elementNumcap.region.indexOf('Республика Удмуртская') > -1) {
-                        console.log(elementNumcap);
-                        f = true;
-                    }
+
+                    elementNumcap = prepare(elementNumcap);
+
                     buffer = new phoneregion(elementNumcap.region);
                     elementNumcap = modificate(elementNumcap, buffer);
                     if (f) {
