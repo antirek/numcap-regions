@@ -41,6 +41,19 @@ var JsonMaker = function (config) {
                 "code": null,
                 "county": null,
             };
+        } else if (buffer.shortName.indexOf('регион') > -1) {
+            codes.getCounties(function (err, array) {
+                var counties = array.filter(function(element){
+                    return buffer.shortName.indexOf(normalise(element.title)) > -1;
+                });
+                if (counties.length > 0) {
+                    elementNumcap.region = {
+                        "title": counties[0].title,
+                        "code": "",
+                        "county": counties[0].code
+                    }
+                }
+            });
         } else {
             codes.getRegionsByType(buffer.type, function (err, array) {
 
@@ -61,52 +74,54 @@ var JsonMaker = function (config) {
 
     var prepare = function (elementNumcap) {
         if (elementNumcap.region.indexOf('Республика Удмуртская') > -1) {
-         //   console.log(elementNumcap);
-         //   f = true;
             elementNumcap.region = 'Удмуртская Республика';
         }                    
 
         if (elementNumcap.region.indexOf('Ханты - Мансийский - Югра АО') > -1) {
-            //console.log(elementNumcap);
-            //f = true;
             elementNumcap.region = 'Ханты-Мансийский автономный округ - Югра';
         }
 
         if (elementNumcap.region.indexOf('Ямало-Ненецкий АО') > -1) {
-            //console.log(elementNumcap);
-            //f = true;
             elementNumcap.region = 'Ямало-Ненецкий автономный округ';
         }
 
         if (elementNumcap.region.indexOf('Республика Саха /Якутия/') > -1) {
-            //console.log(elementNumcap);
-            //f = true;
             elementNumcap.region = 'Республика Саха (Якутия)';
         }
 
         if (elementNumcap.region.indexOf('Чукотский АО') > -1) {
-            //console.log(elementNumcap);
-            //f = true;
             elementNumcap.region = 'Чукотский автономный округ';
         }
         
         if (elementNumcap.region.indexOf('Ненецкий АО') > -1) {
-            //console.log(elementNumcap);
-            //f = true;
             elementNumcap.region = 'Ненецкий автономный округ';
         }
 
         if (elementNumcap.region.indexOf('Республика Кабардино-Балкарская') > -1) {
-            //console.log(elementNumcap);
-            //f = true;
             elementNumcap.region = 'Кабардино-Балкарская республика';
         }
 
         if (elementNumcap.region.indexOf('Республика Чеченская') > -1) {
-            //console.log(elementNumcap);
-            //f = true;
             elementNumcap.region = 'Чеченская республика';
         }
+
+        if (elementNumcap.region.indexOf('Республика Карачаево-Черкесская') > -1) {
+            elementNumcap.region = 'Карачаево-Черкесская республика';
+        }
+
+        if (elementNumcap.region.indexOf('р-ны Абзелиловский и Белорецкий') > -1) {
+            elementNumcap.region = 'Республика Башкортостан';
+        }
+
+        if (elementNumcap.region.indexOf('Сургутский район и г. Сургут') > -1) {
+            elementNumcap.region = 'Ханты-Мансийский автономный округ - Югра';
+        }
+
+        if (elementNumcap.region.indexOf('г. Симферополь, Симферопольский р-он') > -1) {
+            elementNumcap.region = 'Республика Крым';
+        }
+
+        
 
         return elementNumcap;
     };
@@ -119,17 +134,19 @@ var JsonMaker = function (config) {
         codes.loadData(() => {
             resultArr = fullCapacity.map((elementNumcap, i) => { 
                 var buffer;
-                var f;
                 if (elementNumcap.region) {
 
                     elementNumcap = prepare(elementNumcap);
 
                     buffer = new phoneregion(elementNumcap.region);
                     elementNumcap = modificate(elementNumcap, buffer);
-                    if (f) {
-                        console.log(buffer);
-                        console.log(elementNumcap);
+                    
+
+                    if (typeof elementNumcap.region == 'string') {
+                        console.log('region:', elementNumcap.region);
+                        elementNumcap = null;
                     }
+
                 } else {
                     console.log(' ________________________ ! ________________________ ! ________________________')
                     console.log(elementNumcap);
