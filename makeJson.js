@@ -121,6 +121,57 @@ var JsonMaker = function (config) {
             elementNumcap.region = 'Республика Крым';
         }
 
+        if (elementNumcap.region.indexOf('р-н Чайковский') > -1) {
+            elementNumcap.region = 'Пермский край';
+        }
+
+        if (elementNumcap.region.indexOf('Лысьвенский р-н') > -1) {
+            elementNumcap.region = 'Пермский край';
+        }
+
+        if (elementNumcap.region.indexOf('г. Радужный') > -1) {
+            elementNumcap.region = 'Ханты-Мансийский автономный округ - Югра';
+        }
+        
+        if (elementNumcap.region.indexOf('г. Ханты-Мансийск') > -1) {
+            elementNumcap.region = 'Ханты-Мансийский автономный округ - Югра';
+        }
+
+        if (elementNumcap.region.indexOf('г. Инская') > -1) {
+            elementNumcap.region = 'Новосибирская область';
+        }
+
+        if (elementNumcap.region.indexOf('АО. Ленинский') > -1) {            
+            elementNumcap.region = 'Хабаровский край';
+        }
+
+        if (elementNumcap.region.indexOf('г.о. Борисоглебский') > -1) {
+            elementNumcap.region = 'Ярославская область';
+        }
+
+        if (elementNumcap.region.indexOf('г.о. Кинешма') > -1) {
+            elementNumcap.region = 'Ивановская область';
+        }
+
+        if (elementNumcap.region.indexOf('г.о. Егорьевск') > -1) {
+            elementNumcap.region = 'Московская область';
+        }
+
+        if (elementNumcap.region.indexOf('ЗАТО п. Восход') > -1) {
+            elementNumcap.region = 'Московская область';
+        }
+
+        if (elementNumcap.region.indexOf('г.о. Озёры') > -1) {
+            elementNumcap.region = 'Московская область';
+        }
+        
+        if (elementNumcap.region.indexOf('с.п. Луневское') > -1) {
+            elementNumcap.region = 'Московская область';
+        }
+        
+        if (elementNumcap.region.indexOf('н.п. Константиновка') > -1) {
+            elementNumcap.region = 'Республика Татарстан';
+        }
         
 
         return elementNumcap;
