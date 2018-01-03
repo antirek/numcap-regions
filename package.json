@@ -18,8 +18,6 @@
   "homepage": "",
   "dependencies": {
     "cli": "^0.6.5",
-    "mongodb": "^1.4.33",
-    "numcap": "0.0.7",
     "q": "^1.2.0",
     "q-foreach": "0.0.3",
     "russian-codes": "^0.0.5"
