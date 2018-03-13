@@ -50,3 +50,9 @@ Data
 ]
 
 `````
+
+
+### import to mongo
+
+> mongoimport -h host:port -d number-archer -c regions --file capacityregions.json --jsonArray
+
