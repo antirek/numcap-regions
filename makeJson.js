@@ -34,12 +34,15 @@ var JsonMaker = function (config) {
     };
 
     var modificate = function (elementNumcap, buffer) {
+
+        //console.log(elementNumcap);
         
         if (buffer.shortName.indexOf('российская федерация') > -1 || buffer.shortName.indexOf('байконур') > -1) {
             elementNumcap.region = {
                 "title": buffer.baseName,
                 "code": null,
                 "county": null,
+                "utc_offset": null,
             };
         } else if (buffer.shortName.indexOf('регион') > -1) {
             codes.getCounties(function (err, array) {
@@ -50,19 +53,22 @@ var JsonMaker = function (config) {
                     elementNumcap.region = {
                         "title": counties[0].title,
                         "code": "",
-                        "county": counties[0].code
+                        "county": counties[0].code,
+                        "utc_offset": counties[0].utc_offset || '',
                     }
                 }
             });
         } else {
             codes.getRegionsByType(buffer.type, function (err, array) {
 
+                //console.log(array);
                 for (var i = 0; i < array.length; i++) {
                     if (buffer.shortName.indexOf(normalise(array[i].title)) > -1) {
                         elementNumcap.region = {
                             "title": array[i].title,
                             "code": array[i].code, 
                             "county": array[i].county,
+                            "utc_offset": array[i].utc_offset,
                         };
                         break;
                     }
